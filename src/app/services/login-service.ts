@@ -1,23 +1,44 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/Rx';
+
+import { LoginRequest } from '../model/loginRequest';
+import { LoginResponse } from '../model/loginResponse';
+import { SignUpRequest } from '../model/signupRequest';
+import { SignUpResponse } from '../model/signupResponse';
 
 @Injectable()
 export class LoginService {
 
-    temp1 = "psp65";
-    temp2 = "hello";
+    private baseURL = 'http://169.254.165.44:8081/jsp-servlet-mvc-restclient';
+    private headers = new Headers({'Content-Type': 'application/json'});
 
-    loginService(name: string, password: string): boolean {
-        console.log("Inside loginService()");
-
-        if(name == this.temp1 && password == this.temp2)
-            return true;
-
-        return false;
+    constructor(private http: Http) {
     }
-    
-    private handleError(error: any) {
-        console.log("we are in error");
-        return Promise.reject(error.message);
+
+    loginService(loginReq: LoginRequest): Promise<LoginResponse> {
+        const url = 'SessionControllerServlet';
+        
+        const loginApiURL = `${this.baseURL}/${url}`;
+        const body = JSON.stringify(loginReq);
+        return this.http
+        .post(loginApiURL, body, {headers: this.headers})
+        .toPromise()
+        .then((res: Response) => res.json() as LoginResponse)
+        .catch();
+    }
+
+    signupService(signupReq: SignUpRequest): Promise<SignUpResponse> {
+        const url = 'SignupServlet';
+       
+        const signupApiURL = `${this.baseURL}/${url}`;
+        const body = JSON.stringify(signupReq);
+
+        return this.http
+        .post(signupApiURL, body, {headers: this.headers})
+        .toPromise()
+        .then((res: Response) => res.json() as SignUpResponse)
+        .catch();
     }
 
 }

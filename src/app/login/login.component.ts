@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { LoginRequest } from '../model/loginRequest';
+import { LoginResponse } from '../model/loginResponse';
+import { SignUpRequest } from '../model/signupRequest';
+import { SignUpResponse } from '../model/signupResponse';
 
 import { LoginService } from '../services/login-service';
+import { UserIdService } from '../services/userId.service';
 
 @Component({
   selector: 'login-component',
@@ -10,33 +17,68 @@ import { LoginService } from '../services/login-service';
 
 
 export class LoginComponent implements OnInit {
-  user_name: string;
-  user_password: string;
-  result: string;
-  success: boolean;
-  
-  constructor(private loginService: LoginService){}
+  @Input() loginReq: LoginRequest;
+  @Input() signupReq: SignUpRequest;
+
+  loginRes: LoginResponse;
+  signupRes: SignUpResponse;
+
+  constructor(
+    private loginService: LoginService,
+    private userIdService: UserIdService,
+    private router: Router) {}
 
   ngOnInit() {
-
+      this.loginReq = new LoginRequest();
+      this.loginRes = new LoginResponse();
+      this.signupReq = new SignUpRequest();
+      this.signupRes = new SignUpResponse();
   }
-    
-  loginUser(name: string, password: string): void {
-    console.log("Inside loginUser" + name +" " + password);
 
-    if (!name || !password) {
-      this.result = "Please fill username and password";
-      this.success = false;
+
+  loginUser() {
+    
+    if (!this.loginReq["email"] || !this.loginReq["password"]) {
+      this.loginRes["message"] = "Please fill username and password";
+      this.loginRes["success"] = false;
       return;
     }
 
-    name = name.trim();
-    this.success = this.loginService.loginService(name, password);
+    this.loginService.loginService(this.loginReq).then(res => {
+        this.loginRes = res;
+        
+        if (this.loginRes["success"]) {
+          this.userIdService.setUserId(this.loginRes["userId"]);
+          this.router.navigate(['/dashboard']);
+        } 
+    });
 
-    if(this.success)
-      this.result = "Success in logging in";
-    else
-      this.result = "Invalid username/password."
+  }
+
+  signUpUser(type: string ): void {
+    
+    if (!this.signupReq["email"] || !this.signupReq["password"] || !this.signupReq["name"] || 
+        this.signupReq["!address"] || !this.signupReq["phone"]) {
+      this.signupRes["message"] = "Please fill username and password";
+      this.signupRes["success"] = false;
+      return;
+    }
+
+    this.signupReq["type"] = type;
+
+    this.loginService.signupService(this.signupReq).then(res => {
+      this.signupRes = res;
+
+      if (this.signupRes["success"]) {
+        this.signupReq["email"] = "";
+        this.signupReq["name"] = "";
+        this.signupReq["password"] = "";
+        this.signupReq["address"] = "";
+        this.signupReq["phone"] = "";
+      } 
+  
+    });
+
   }
 
 }

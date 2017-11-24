@@ -1,10 +1,30 @@
 <div>
   <label> Login </label>
   <br>
-  <input [(ngModel)]="user_name" placeholder="Username" required />
-  <input [(ngModel)]="user_password" placeholder="Password" required /> 
+  <input type="text" [(ngModel)]="loginReq.email" placeholder="Email" required/>
   <br>
-  <button (click)="loginUser(user_name, user_password)">Login</button>
+  <input type="password" [(ngModel)]="loginReq.password" placeholder="Password" /> 
+  <br>
+  <button (click)="loginUser()">Login</button>
+  {{loginRes["message"]}}
 </div>
+<hr />
 
-{{result}}
+
+<div>
+  <label> SignUp </label>
+  <br>
+  <input type="text" [(ngModel)]="signupReq.name" placeholder="Name" required />
+  <br>
+  <input type="text" [(ngModel)]="signupReq.email" placeholder="Email" required /> 
+  <br>
+  <input type="password" [(ngModel)]="signupReq.password" placeholder="Password" required /> 
+  <br>
+  <input type="text" [(ngModel)]="signupReq.address" placeholder="Address" required /> 
+  <br>
+  <input type="text" [(ngModel)]="signupReq.phone" placeholder="Phone" required /> 
+  <br>
+  <button (click)="signUpUser(0)">SignUp</button> 
+  {{signupRes["message"]}}
+</div>
+<hr />
