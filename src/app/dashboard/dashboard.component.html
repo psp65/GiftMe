@@ -1,12 +1,20 @@
-Welcome back {{profile.name}}
+Welcome {{userName}} !
 <nav>
     <a routerLink="/dashboard">Dashboard</a>
     <a routerLink="/edit">Update Registry</a>
+    <a routerLink="/items"> View Items </a>
     <a routerLink="/donate">Donate Item</a>
     <a routerLink="/received"> Received Items</a>
     <a routerLink="/profile">Profile</a>
     <a routerLink="/login"> Log Out</a>
 </nav>
 
-<router-outlet></router-outlet>
+<br><br><br>
+
+<create-registry-component></create-registry-component>
+<item-search></item-search>
+
+
+
   
+

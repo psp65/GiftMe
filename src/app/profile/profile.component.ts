@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { Profile } from '../model/profile';
 
@@ -21,17 +22,18 @@ export class ProfileComponent implements OnInit{
     constructor(
         private profileService: ProfileService,
         private userIdService: UserIdService,
-        private router: Router) {};
+        private router: Router,
+        private location: Location) {};
 
     ngOnInit(){
         this.profile = new Profile();
         this.userId = this.userIdService.getUserId();
         
         if(this.userId == undefined){
-          this.router.navigate(['/NotFound']);
+          this.router.navigate(['/unauth']);
         }
-
-        this.getUserProfile(this.userId);
+        this.profile["userId"] = this.userId
+        this.getUserProfile(this.profile["userId"]);
     }
 
     getUserProfile(userId: string) {
@@ -39,6 +41,10 @@ export class ProfileComponent implements OnInit{
         this.profileService.getProfile(userId)
         .then(res => this.profile = res);
         
+    }
+
+    goBack() {
+        this.location.back();
     }
 
 

@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
-import { Profile } from '../model/profile';
-
 import { UserIdService } from '../services/userId.service';
 import { ProfileService } from '../services/profile.service';
 
@@ -17,7 +15,7 @@ import { ProfileService } from '../services/profile.service';
 export class DashboardComponent implements OnInit{
   
   userId: string;
-  profile: Profile;
+  userName: string;
 
   constructor(
     private userIdService: UserIdService,
@@ -27,21 +25,12 @@ export class DashboardComponent implements OnInit{
   ngOnInit(){
 
     this.userId = this.userIdService.getUserId();
+    this.userName = this.userIdService.getUserName();
 
-    console.log(this.userId);
     if(this.userId == undefined){
-      this.router.navigate(['/NotFound']);
+      this.router.navigate(['/unauth']);
     }
 
-    this.getUserProfile(this.userId);
   }
-
-  getUserProfile(userId: string) {
-    
-    this.profileService.getProfile(userId)
-    .then(res => this.profile = res);
-            
-  }
-    
-
+   
 }

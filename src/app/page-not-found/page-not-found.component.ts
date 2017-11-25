@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'pagenotfound-component',
@@ -9,4 +10,13 @@ import { Component } from '@angular/core';
 
 export class PageNotFoundComponent {
   title = 'page not found text';
+
+  constructor(private location: Location) {
+    
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }

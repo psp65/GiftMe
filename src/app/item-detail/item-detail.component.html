@@ -1,0 +1,19 @@
+Item Detail
+<br> <br> <br>
+<div *ngIf="item">
+    
+    <label>Name:</label> {{item.name}}
+    <br>
+    <label>Description:</label> {{item.description}}
+    <br>
+    <label>Category:</label> {{item.category}}
+    <br>
+    <label>Price:</label> {{item.price}}
+    <br>
+    <label>Quantity:</label> {{item.quantity}}
+    <br>
+    <label>Photo:</label> {{item.photo}}
+    <br>
+</div>
+    
+<button (click)="goBack()">Go back</button>

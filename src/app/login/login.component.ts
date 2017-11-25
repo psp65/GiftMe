@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   loginRes: LoginResponse;
   signupRes: SignUpResponse;
+  show: boolean;
 
   constructor(
     private loginService: LoginService,
@@ -33,6 +34,9 @@ export class LoginComponent implements OnInit {
       this.loginRes = new LoginResponse();
       this.signupReq = new SignUpRequest();
       this.signupRes = new SignUpResponse();
+      
+      this.userIdService.setUserId(null);
+      this.userIdService.setUserName(null);
   }
 
 
@@ -49,6 +53,7 @@ export class LoginComponent implements OnInit {
         
         if (this.loginRes["success"]) {
           this.userIdService.setUserId(this.loginRes["userId"]);
+          this.userIdService.setUserName(this.loginRes["name"]);
           this.router.navigate(['/dashboard']);
         } 
     });
@@ -56,12 +61,14 @@ export class LoginComponent implements OnInit {
   }
 
   signUpUser(type: string ): void {
-    
-    if (!this.signupReq["email"] || !this.signupReq["password"] || !this.signupReq["name"] || 
-        this.signupReq["!address"] || !this.signupReq["phone"]) {
-      this.signupRes["message"] = "Please fill username and password";
-      this.signupRes["success"] = false;
-      return;
+
+    if(type == "0"){
+      if (!this.signupReq["email"] || !this.signupReq["password"] || !this.signupReq["name"] || 
+          this.signupReq["!address"] || !this.signupReq["phone"]) {
+            this.signupRes["message"] = "Please fill username and password";
+            this.signupRes["success"] = false;
+            return;
+      }
     }
 
     this.signupReq["type"] = type;
