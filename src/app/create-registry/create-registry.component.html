@@ -1,29 +1,13 @@
 <button (click)="expandCreateRegistry()">Create Registry</button>
 <div *ngIf = "createRegistryExpand">
     <label> Create Registry: </label>
-    <input type="text" placeholder="Registry Name"/>
+    <input type="text" [(ngModel)]="registry.name" placeholder="Registry Name"/>
     <br>
     <label> Registry type: </label>
-    <input type="radio"> Public
-    <input type="radio"> Private
+    <input type="radio" [(ngModel)]="registry.public" name="sharingType" [value]=true> Public
+    <input type="radio" [(ngModel)]="registry.public" name="sharingType" [value]=false> Private
     <br>    
 
+    {{registry.public}}
     <br>
 </div>
-
-
-<div>
-        <form ng-submit="submit()" ng-controller="AppCtrl" ng-cloak>
-          <p>Selected Value: <span class="radioValue">{{ data.group1 }}</span> </p>
-      
-          <md-radio-group ng-model="data.group1">
-      
-            <md-radio-button value="Apple" class="md-primary">Apple</md-radio-button>
-            <md-radio-button value="Banana"> Banana </md-radio-button>
-            <md-radio-button value="Mango">Mango</md-radio-button>
-      
-          </md-radio-group>
-      
-          <hr />
-          </form>
-        </div>      

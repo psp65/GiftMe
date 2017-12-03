@@ -10,7 +10,7 @@ import { SignUpResponse } from '../model/signupResponse';
 @Injectable()
 export class LoginService {
 
-    private baseURL = 'http://169.254.165.44:8081/jsp-servlet-mvc-restclient';
+    private baseURL = 'https://169.254.165.44:8443/jsp-servlet-mvc-restclient';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {

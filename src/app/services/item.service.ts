@@ -15,7 +15,7 @@ const httpOptions = {
 @Injectable()
 export class ItemService {
 
-  private baseUrl = 'http://169.254.165.44:8081/jsp-servlet-mvc-restclient'; 
+  private baseUrl = 'https://169.254.165.44:8443/jsp-servlet-mvc-restclient'; 
 
   constructor(private http: HttpClient) { }
 

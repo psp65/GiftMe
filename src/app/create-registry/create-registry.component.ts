@@ -13,7 +13,6 @@ import { Registry } from '../model/registry';
 export class CreateRegistryComponent implements OnInit{
     @Input() registry: Registry;
     createRegistryExpand: boolean;
-    
 
     constructor(){
 

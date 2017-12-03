@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { UserIdService } from '../services/userId.service';
 import { ProfileService } from '../services/profile.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'dashboard-component',

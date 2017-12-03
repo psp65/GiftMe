@@ -8,6 +8,7 @@ import { SignUpResponse } from '../model/signupResponse';
 
 import { LoginService } from '../services/login-service';
 import { UserIdService } from '../services/userId.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'login-component',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private userIdService: UserIdService,
-    private router: Router) {}
+    private router: Router
+    ) {}
 
   ngOnInit() {
       this.loginReq = new LoginRequest();

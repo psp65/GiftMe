@@ -16,6 +16,7 @@ import { AllItemsComponent } from './all-items/all-items.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CreateRegistryComponent } from './create-registry/create-registry.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 import { UnauthAccessComponenet} from './unauth-access/unauth-access.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -24,6 +25,7 @@ import { UserIdService } from './services/userId.service';
 import { ProfileService } from './services/profile.service';
 import { ItemService } from './services/item.service';
 import { HttpClient } from '@angular/common/http/src/client';
+
 
 
 
@@ -36,6 +38,7 @@ import { HttpClient } from '@angular/common/http/src/client';
     ItemDetailComponent,
     AllItemsComponent,
     CreateRegistryComponent,
+    UserSearchComponent,
     ProfileComponent,
     UnauthAccessComponenet,
     PageNotFoundComponent,
