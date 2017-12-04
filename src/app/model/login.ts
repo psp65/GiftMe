@@ -6,4 +6,5 @@ export class Login {
     token: string;
     message: string;
     success: boolean;
+    answer: string;
 }

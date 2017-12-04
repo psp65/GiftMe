@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { Location } from '@angular/common';
 import { ItemService } from '../services/item.service';
 
 import { Item } from '../model/item';
@@ -10,19 +10,20 @@ import { Item } from '../model/item';
     styleUrls: ['./add-item.component.css']
 })
 
-export class AddItemComponent implements OnInit{
+export class AddItemComponent implements OnInit {
     @Input() item: Item;
     message: string;
-    
-    constructor(private itemService: ItemService){
+
+    constructor(private itemService: ItemService,
+        private location: Location) {
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.item = new Item();
     }
 
-    addItem(){
+    addItem() {
         this.itemService.addItem(this.item).subscribe(item => {
             this.item = item
             this.message = "Item Succesfully Added!";
@@ -32,9 +33,13 @@ export class AddItemComponent implements OnInit{
             this.item["price"] = "";
             this.item["quantity"] = "";
             this.item["category"] = "";
-        
+
         }
         );
+    }
+
+    goBack() {
+        this.location.back();
     }
 
 }

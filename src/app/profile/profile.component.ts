@@ -49,6 +49,18 @@ export class ProfileComponent implements OnInit {
 
     }
 
+    updateUser() {
+        this.profile["userId"] = this.userIdService.getUserId();
+        this.profile["token"] = this.userIdService.getToken();
+        this.profileService.updateProfile(this.profile).subscribe(res => {
+            this.profile = res;
+            if (!this.profile["success"]) {
+                this.router.navigate(['/unauth']);
+            }
+        });
+
+    }
+
     goBack() {
         this.location.back();
     }

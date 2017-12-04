@@ -5,10 +5,22 @@
       <br>
       <input class="form-control" type="text" [(ngModel)]="login.email" placeholder="Email" required/>
       <br>
-      <input class="form-control" type="password" [(ngModel)]="login.password" placeholder="Password" required/> 
+      <input class="form-control" type="password" [(ngModel)]="login.password" placeholder="Password" required/>
       <br>
       <button class="btn btn-primary" (click)="loginUser()">Login</button>
       {{login["message"]}}
+    </div>
+    <div style="width:50%;margin:auto;">
+      <a (click)="changeShow()">Forget Password?</a>
+      <br>
+      <div *ngIf="show">
+        <input class="form-control" type="text" [(ngModel)]="login.email" placeholder="Email" required/>
+        <br>
+        <input class="form-control" type="password" [(ngModel)]="login.answer" placeholder="Your secret answer" required/>
+        <br>
+        <button class="btn btn-primary" (click)="loginUser()">Login with this</button>
+        {{login["message"]}}
+      </div>
     </div>
   </div>
 
@@ -19,15 +31,17 @@
       <br>
       <input class="form-control" type="text" [(ngModel)]="signup.name" placeholder="Name" required />
       <br>
-      <input class="form-control" type="text" [(ngModel)]="signup.email" placeholder="Email" required /> 
+      <input class="form-control" type="text" [(ngModel)]="signup.email" placeholder="Email" required />
       <br>
-      <input class="form-control" type="password" [(ngModel)]="signup.password" placeholder="Password" required /> 
+      <input class="form-control" type="password" [(ngModel)]="signup.password" placeholder="Password" required />
       <br>
-      <input class="form-control" type="text" [(ngModel)]="signup.address" placeholder="Address" required /> 
+      <input class="form-control" type="text" [(ngModel)]="signup.address" placeholder="Address" required />
       <br>
-      <input class="form-control" type="text" [(ngModel)]="signup.phone" placeholder="Phone" required /> 
+      <input class="form-control" type="text" [(ngModel)]="signup.phone" placeholder="Phone" required />
       <br>
-      <button class="btn btn-primary" (click)="signUpUser(0)">SignUp</button> 
+      <input class="form-control" type="text" [(ngModel)]="signup.answer" placeholder="Your mother's maiden name?" required />
+      <br>
+      <button class="btn btn-primary" (click)="signUpUser(0)">SignUp</button>
       {{signup["message"]}}
     </div>
   </div>

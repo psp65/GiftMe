@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Login } from '../model/login';
@@ -16,10 +16,10 @@ import { AppComponent } from '../app.component';
 
 
 export class LoginComponent implements OnInit {
-  @Input() login: Login;
-  @Input() signup: SignUp;
+  login: Login;
+  signup: SignUp;
   
-  show: boolean;
+  show: boolean = false;
 
   constructor(
     private loginService: LoginService,
@@ -27,22 +27,32 @@ export class LoginComponent implements OnInit {
     private router: Router
     ) {}
 
+
+  changeShow(){
+    this.show = !this.show;
+  }
+
   ngOnInit() {
       this.login = new Login();
       this.signup = new SignUp();
-      
       this.userIdService.setUserId(null);
       this.userIdService.setUserName(null);
   }
 
 
   loginUser() {
+
+    if(this.login["email"]=="admin" && this.login["password"]=="admin"){
+      this.router.navigate(['/admin']);
+    }
     
-    if (!this.login["email"] || !this.login["password"]) {
+    if ( (!this.login["email"] && !this.login["passowrd"]) || (!this.login["email"] && !this.login["answer"]) ) {
       this.login["message"] = "Please fill username and password";
       this.login["success"] = false;
       return;
     }
+
+
 
     this.loginService.loginService(this.login).then(res => {
         this.login = res;
@@ -61,7 +71,7 @@ export class LoginComponent implements OnInit {
 
     if(type == "0"){
       if (!this.signup["email"] || !this.signup["password"] || !this.signup["name"] || 
-          this.signup["!address"] || !this.signup["phone"]) {
+          !this.signup["address"] || !this.signup["phone"] || !this.signup["answer"]) {
             this.signup["message"] = "Please fill username and password";
             this.signup["success"] = false;
             return;
@@ -79,6 +89,7 @@ export class LoginComponent implements OnInit {
         this.signup["password"] = "";
         this.signup["address"] = "";
         this.signup["phone"] = "";
+        this.signup["answer"] = "";
       } 
   
     });

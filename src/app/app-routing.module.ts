@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminComponent } from './admin/admin.component';
+import { AddItemComponent } from './add-item/add-item.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AllItemsComponent } from './all-items/all-items.component';
@@ -13,6 +15,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
+    { path: 'admin', component: AdminComponent },
+    { path: 'addItem', component: AddItemComponent},
     { path: 'dashboard', component: DashboardComponent },
     { path: 'items', component: AllItemsComponent },
     { path: 'item/:id', component: ItemDetailComponent },

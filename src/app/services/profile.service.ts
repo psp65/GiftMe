@@ -16,7 +16,7 @@ const httpOptions = {
 export class ProfileService {
 
     private baseURL = 'https://169.254.165.44:8443/jsp-servlet-mvc-restclient';
-    
+
     constructor(private http: HttpClient) { }
 
     /* GET users containing search term */
@@ -35,25 +35,37 @@ export class ProfileService {
     }
 
     getProfile(prof: Profile): Observable<Profile> {
-       
+
         const url = 'UserProfileServlet';
         const getProfileApiURL = `${this.baseURL}/${url}`;
-        
+
         return this.http.post<Profile>(getProfileApiURL, prof).pipe(
             tap(_ => console.log(`fetched profile for id=${prof.userId}`)),
             catchError(this.handleError<Profile>(`getProfile id=${prof.userId}`))
         );
-    
+
     }
 
-    private handleError<T> (operation = 'operation', result?: T) {
+    updateProfile(prof: Profile): Observable<Profile> {
+
+        const url = 'UpdateUserProfileServlet';
+        const getProfileApiURL = `${this.baseURL}/${url}`;
+
+        return this.http.post<Profile>(getProfileApiURL, prof).pipe(
+            tap(_ => console.log(`updated profile for id=${prof.userId}`)),
+            catchError(this.handleError<Profile>(`updateProfile id=${prof.userId}`))
+        );
+
+    }
+
+    private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
-    
-          console.error(error);
-          console.log(`${operation} failed: ${error.message}`);
-          return of(result as T);
+
+            console.error(error);
+            console.log(`${operation} failed: ${error.message}`);
+            return of(result as T);
         };
-      }
-    
+    }
+
 
 }

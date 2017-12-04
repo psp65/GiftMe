@@ -6,4 +6,5 @@ export class SignUp {
     phone: string;
     message: string;
     success: boolean;
+    answer: string;
 }
