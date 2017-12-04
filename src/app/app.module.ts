@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http/src/client';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,7 +25,7 @@ import { LoginService } from './services/login-service';
 import { UserIdService } from './services/userId.service';
 import { ProfileService } from './services/profile.service';
 import { ItemService } from './services/item.service';
-import { HttpClient } from '@angular/common/http/src/client';
+import { RegistryService } from './services/registry.service';
 
 
 
@@ -55,7 +56,8 @@ import { HttpClient } from '@angular/common/http/src/client';
     LoginService,
     UserIdService,
     ItemService,
-    ProfileService 
+    ProfileService,
+    RegistryService
   ],
   bootstrap: [AppComponent]
 })

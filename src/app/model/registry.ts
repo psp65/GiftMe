@@ -1,10 +1,11 @@
-import { Item } from './item';
-import { UserId } from './userId';
-
 export class Registry {
+    userId: string;
     registryId: string;
+    token: string;
     name: string;
-    public: boolean;
-    items: Item[];
-    shared: UserId[];
+    showPublic: boolean;
+    itemId: string;
+    sharedUserId: string;
+    success: boolean;
+    message: string;
 }

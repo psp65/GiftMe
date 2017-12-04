@@ -6,4 +6,6 @@ export class Item {
     price: string;
     photo: string;
     quantity: string;
+    message: string;
+    success: boolean;
 }

@@ -5,6 +5,7 @@ export class UserIdService{
 
     userId: string;
     userName: string;
+    token:  string;
 
     setUserId(id: string){
         this.userId = id;
@@ -14,12 +15,20 @@ export class UserIdService{
         this.userName = name;
     }
 
+    setToken(token: string){
+        this.token = token;
+    }
+
     getUserId(): string{
         return this.userId;
     }
 
     getUserName(): string{
         return this.userName;
+    }
+
+    getToken(): string{
+        return this.token;
     }
 
 } 

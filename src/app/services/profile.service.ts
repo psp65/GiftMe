@@ -34,15 +34,16 @@ export class ProfileService {
         );
     }
 
-    getProfile(userId: string): Promise<Profile> {
+    getProfile(prof: Profile): Observable<Profile> {
+       
         const url = 'UserProfileServlet';
         const getProfileApiURL = `${this.baseURL}/${url}`;
         
-        return this.http
-        .post(getProfileApiURL, userId)
-        .toPromise()
-        .then((res: Response) => res.json() as Profile)
-        .catch();
+        return this.http.post<Profile>(getProfileApiURL, prof).pipe(
+            tap(_ => console.log(`fetched profile for id=${prof.userId}`)),
+            catchError(this.handleError<Profile>(`getProfile id=${prof.userId}`))
+        );
+    
     }
 
     private handleError<T> (operation = 'operation', result?: T) {

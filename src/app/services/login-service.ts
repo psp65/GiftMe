@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/Rx';
 
-import { LoginRequest } from '../model/loginRequest';
-import { LoginResponse } from '../model/loginResponse';
-import { SignUpRequest } from '../model/signupRequest';
-import { SignUpResponse } from '../model/signupResponse';
+import { Login } from '../model/login';
+import { SignUp } from '../model/signup';
 
 @Injectable()
 export class LoginService {
@@ -16,7 +14,7 @@ export class LoginService {
     constructor(private http: Http) {
     }
 
-    loginService(loginReq: LoginRequest): Promise<LoginResponse> {
+    loginService(loginReq: Login): Promise<Login> {
         const url = 'SessionControllerServlet';
         
         const loginApiURL = `${this.baseURL}/${url}`;
@@ -24,11 +22,11 @@ export class LoginService {
         return this.http
         .post(loginApiURL, body, {headers: this.headers})
         .toPromise()
-        .then((res: Response) => res.json() as LoginResponse)
+        .then((res: Response) => res.json() as Login)
         .catch();
     }
 
-    signupService(signupReq: SignUpRequest): Promise<SignUpResponse> {
+    signupService(signupReq: SignUp): Promise<SignUp> {
         const url = 'SignupServlet';
        
         const signupApiURL = `${this.baseURL}/${url}`;
@@ -37,7 +35,7 @@ export class LoginService {
         return this.http
         .post(signupApiURL, body, {headers: this.headers})
         .toPromise()
-        .then((res: Response) => res.json() as SignUpResponse)
+        .then((res: Response) => res.json() as SignUp)
         .catch();
     }
 

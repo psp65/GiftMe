@@ -1,30 +1,34 @@
-<div>
-  <label> Login </label>
-  <br>
-  <input type="text" [(ngModel)]="loginReq.email" placeholder="Email" required/>
-  <br>
-  <input type="password" [(ngModel)]="loginReq.password" placeholder="Password" /> 
-  <br>
-  <button (click)="loginUser()">Login</button>
-  {{loginRes["message"]}}
-</div>
-<hr />
+<div class="row">
+  <div class="col-sm-6 col-md-6 col-lg-6" style="border-right:1px solid black; margin-top:100px;">
+    <div style="width:50%;margin:auto;">
+      <label>Login</label>
+      <br>
+      <input class="form-control" type="text" [(ngModel)]="login.email" placeholder="Email" required/>
+      <br>
+      <input class="form-control" type="password" [(ngModel)]="login.password" placeholder="Password" required/> 
+      <br>
+      <button class="btn btn-primary" (click)="loginUser()">Login</button>
+      {{login["message"]}}
+    </div>
+  </div>
 
 
-<div>
-  <label> SignUp </label>
-  <br>
-  <input type="text" [(ngModel)]="signupReq.name" placeholder="Name" required />
-  <br>
-  <input type="text" [(ngModel)]="signupReq.email" placeholder="Email" required /> 
-  <br>
-  <input type="password" [(ngModel)]="signupReq.password" placeholder="Password" required /> 
-  <br>
-  <input type="text" [(ngModel)]="signupReq.address" placeholder="Address" required /> 
-  <br>
-  <input type="text" [(ngModel)]="signupReq.phone" placeholder="Phone" required /> 
-  <br>
-  <button (click)="signUpUser(0)">SignUp</button> 
-  {{signupRes["message"]}}
+  <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:100px;">
+    <div style="width:70%;margin:auto;">
+      <label>SignUp</label>
+      <br>
+      <input class="form-control" type="text" [(ngModel)]="signup.name" placeholder="Name" required />
+      <br>
+      <input class="form-control" type="text" [(ngModel)]="signup.email" placeholder="Email" required /> 
+      <br>
+      <input class="form-control" type="password" [(ngModel)]="signup.password" placeholder="Password" required /> 
+      <br>
+      <input class="form-control" type="text" [(ngModel)]="signup.address" placeholder="Address" required /> 
+      <br>
+      <input class="form-control" type="text" [(ngModel)]="signup.phone" placeholder="Phone" required /> 
+      <br>
+      <button class="btn btn-primary" (click)="signUpUser(0)">SignUp</button> 
+      {{signup["message"]}}
+    </div>
+  </div>
 </div>
-<hr />

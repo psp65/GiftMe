@@ -14,33 +14,39 @@ import { UserIdService } from '../services/userId.service';
     styleUrls: ['./profile.component.css']
 })
 
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
     @Input() profile: Profile;
 
-    userId: string;
+    //userId: string;
 
     constructor(
         private profileService: ProfileService,
         private userIdService: UserIdService,
         private router: Router,
-        private location: Location) {};
+        private location: Location) { };
 
-    ngOnInit(){
+    ngOnInit() {
         this.profile = new Profile();
-        this.userId = this.userIdService.getUserId();
-        
-        if(this.userId == undefined){
-          this.router.navigate(['/unauth']);
+        this.profile["userId"] = this.userIdService.getUserId();
+        this.profile["token"] = this.userIdService.getToken();
+        //this.profile["token"] = "50";
+
+        if (this.profile.userId == undefined) {
+            this.router.navigate(['/unauth']);
         }
-        this.profile["userId"] = this.userId
-        this.getUserProfile(this.profile["userId"]);
+
+        this.getUserProfile(this.profile);
     }
 
-    getUserProfile(userId: string) {
+    getUserProfile(prof: Profile) {
 
-        this.profileService.getProfile(userId)
-        .then(res => this.profile = res);
-        
+        this.profileService.getProfile(prof).subscribe(res => {
+            this.profile = res;
+            if (!this.profile["success"]) {
+                this.router.navigate(['/unauth']);
+            }
+        });
+
     }
 
     goBack() {
@@ -49,4 +55,3 @@ export class ProfileComponent implements OnInit{
 
 
 }
-  

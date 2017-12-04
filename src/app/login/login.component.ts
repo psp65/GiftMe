@@ -1,10 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginRequest } from '../model/loginRequest';
-import { LoginResponse } from '../model/loginResponse';
-import { SignUpRequest } from '../model/signupRequest';
-import { SignUpResponse } from '../model/signupResponse';
+import { Login } from '../model/login';
+import { SignUp } from '../model/signup';
 
 import { LoginService } from '../services/login-service';
 import { UserIdService } from '../services/userId.service';
@@ -18,11 +16,9 @@ import { AppComponent } from '../app.component';
 
 
 export class LoginComponent implements OnInit {
-  @Input() loginReq: LoginRequest;
-  @Input() signupReq: SignUpRequest;
-
-  loginRes: LoginResponse;
-  signupRes: SignUpResponse;
+  @Input() login: Login;
+  @Input() signup: SignUp;
+  
   show: boolean;
 
   constructor(
@@ -32,10 +28,8 @@ export class LoginComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-      this.loginReq = new LoginRequest();
-      this.loginRes = new LoginResponse();
-      this.signupReq = new SignUpRequest();
-      this.signupRes = new SignUpResponse();
+      this.login = new Login();
+      this.signup = new SignUp();
       
       this.userIdService.setUserId(null);
       this.userIdService.setUserName(null);
@@ -44,18 +38,19 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     
-    if (!this.loginReq["email"] || !this.loginReq["password"]) {
-      this.loginRes["message"] = "Please fill username and password";
-      this.loginRes["success"] = false;
+    if (!this.login["email"] || !this.login["password"]) {
+      this.login["message"] = "Please fill username and password";
+      this.login["success"] = false;
       return;
     }
 
-    this.loginService.loginService(this.loginReq).then(res => {
-        this.loginRes = res;
+    this.loginService.loginService(this.login).then(res => {
+        this.login = res;
         
-        if (this.loginRes["success"]) {
-          this.userIdService.setUserId(this.loginRes["userId"]);
-          this.userIdService.setUserName(this.loginRes["name"]);
+        if (this.login["success"]) {
+          this.userIdService.setUserId(this.login["userId"]);
+          this.userIdService.setUserName(this.login["name"]);
+          this.userIdService.setToken(this.login["token"]);
           this.router.navigate(['/dashboard']);
         } 
     });
@@ -65,25 +60,25 @@ export class LoginComponent implements OnInit {
   signUpUser(type: string ): void {
 
     if(type == "0"){
-      if (!this.signupReq["email"] || !this.signupReq["password"] || !this.signupReq["name"] || 
-          this.signupReq["!address"] || !this.signupReq["phone"]) {
-            this.signupRes["message"] = "Please fill username and password";
-            this.signupRes["success"] = false;
+      if (!this.signup["email"] || !this.signup["password"] || !this.signup["name"] || 
+          this.signup["!address"] || !this.signup["phone"]) {
+            this.signup["message"] = "Please fill username and password";
+            this.signup["success"] = false;
             return;
       }
     }
 
-    this.signupReq["type"] = type;
+    this.signup["type"] = type;
 
-    this.loginService.signupService(this.signupReq).then(res => {
-      this.signupRes = res;
+    this.loginService.signupService(this.signup).then(res => {
+      this.signup = res;
 
-      if (this.signupRes["success"]) {
-        this.signupReq["email"] = "";
-        this.signupReq["name"] = "";
-        this.signupReq["password"] = "";
-        this.signupReq["address"] = "";
-        this.signupReq["phone"] = "";
+      if (this.signup["success"]) {
+        this.signup["email"] = "";
+        this.signup["name"] = "";
+        this.signup["password"] = "";
+        this.signup["address"] = "";
+        this.signup["phone"] = "";
       } 
   
     });
