@@ -13,8 +13,9 @@
     <br />
     <li *ngFor="let item_name of item_names">
         <span class="badge">{{item_name.name}}</span> 
-        <button (click)="assignItemToMe(regi_name.registryId, item_name.itemId)">Assign to Me </button>
+        <button (click)="assignItemToMe(item_name.itemId)">Assign to Me </button>
     </li>
+    {{message}}
     <hr />
 </div>
 <button class="btn btn-success" (click)="goBack()">Go back</button>

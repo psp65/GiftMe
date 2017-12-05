@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { RegistryService } from '../services/registry.service';
 import { UserIdService } from '../services/userId.service';
@@ -26,6 +27,7 @@ export class MyRegistryComponent implements OnInit {
     constructor(
         private registryService: RegistryService,
         private userIdService: UserIdService,
+        private router: Router,
         private location: Location,
     ) { }
 
@@ -35,6 +37,11 @@ export class MyRegistryComponent implements OnInit {
         this.userId = new UserId();
 
         this.userId["userId"] = this.userIdService.getUserId(); 
+   
+        if (this.userId.userId == undefined) {
+            this.router.navigate(['/unauth']);
+        }
+
 
         this.getAllRegistriesOfUser(this.userId);
     }

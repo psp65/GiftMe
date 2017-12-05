@@ -16,8 +16,8 @@
 <div *ngIf="shared_items">
   <ul class="decorator">
     <li *ngFor="let item of shared_items">
-      <span class="badge">{{item.itemId}}</span> {{item.name}}
-      <button class="delete" title="remove item" (click)="delete(item)">x</button>
+      <span class="badge">{{item.itemId}}</span> {{item.name}}<br>
+      <button class="delete" title="remove item" (click)="delete(item)">x</button><br>
     </li>
   </ul>
 <!-- <button (click)="sendMessage()">Set Items</button> -->

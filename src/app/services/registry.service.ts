@@ -95,12 +95,15 @@ export class RegistryService {
 
     }
 
-    setUserAssign(special: SelfAssign): void {
+    setUserAssign(special: SelfAssign): Observable<SelfAssign> {
 
         const getUserServlet = 'AssignEmailToRegistryItemServlet';
         const url = `${this.baseUrl}/${getUserServlet}`;
 
-        this.http.post(url, special);
+        return this.http.post<SelfAssign>(url, special).pipe(
+            tap(_ => console.log(`successfull sending shared userId.`)),
+            catchError(this.handleError<SelfAssign>(`Error in sending shared userId`))
+        );
     }
 
     /**
@@ -118,4 +121,4 @@ export class RegistryService {
         };
     }
 
-}
+}   

@@ -15,5 +15,10 @@ Item Detail
     <label>Photo:</label> {{item.photo}}
     <br>
 </div>
+
+<div *ngIf="show">
+        <button class="btn btn-success" (click)="delete()">Delete Item</button>    
+</div>
+
     
 <button class="btn btn-success" (click)="goBack()">Go back</button>

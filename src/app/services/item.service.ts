@@ -92,7 +92,7 @@ export class ItemService {
 
   /** DELETE: delete the item from the server */
   deleteItem (id: string): Observable<Item> {
-    const itemServlet = 'ItemSearchServlet';
+    const itemServlet = 'DeleteItemServlet';
     const url = `${this.baseUrl}/${itemServlet}`;
 
     return this.http.post<Item>(url, id).pipe(

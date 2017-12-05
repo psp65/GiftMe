@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit {
 
         this.profileService.getProfile(prof).subscribe(res => {
             this.profile = res;
-            console.log(this.profile);
         });
 
     }
