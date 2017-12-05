@@ -35,23 +35,23 @@ export class CreateRegistryComponent implements OnInit {
 
     createRegistry() {
         this.registry["userId"] = this.userIdService.getUserId();
-        this.registry["token"] = this.userIdService.getToken();
         this.registryService.createRegistry(this.registry).subscribe(regi => {
             this.registry = regi;
-            this.registry["token"] = this.userIdService.getToken();
 
-
-            this.shared_items.forEach(element => {
-                this.registry["itemId"] = element["itemId"];
-                this.registryService.addItemsToRegistry(this.registry).subscribe();
-            });
+            if (this.shared_items != undefined) {
+                this.shared_items.forEach(element => {
+                    this.registry["itemId"] = element["itemId"];
+                    this.registryService.addItemsToRegistry(this.registry).subscribe();
+                });
+            }
 
             if (!this.registry["showPublic"]) {
-
-                this.shared_users.forEach(element => {
-                    this.registry["sharedUserId"] = element["userId"];
-                    this.registryService.addUsersToRegistry(this.registry).subscribe();
-                });
+                if (this.shared_users != undefined) {
+                    this.shared_users.forEach(element => {
+                        this.registry["sharedUserId"] = element["userId"];
+                        this.registryService.addUsersToRegistry(this.registry).subscribe();
+                    });
+                }
             }
         });
 

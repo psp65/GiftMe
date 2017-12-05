@@ -15,9 +15,7 @@ import { UserIdService } from '../services/userId.service';
 })
 
 export class ProfileComponent implements OnInit {
-    @Input() profile: Profile;
-
-    //userId: string;
+    profile: Profile;
 
     constructor(
         private profileService: ProfileService,
@@ -28,7 +26,7 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.profile = new Profile();
         this.profile["userId"] = this.userIdService.getUserId();
-        this.profile["token"] = this.userIdService.getToken();
+        // this.profile["token"] = this.userIdService.getToken();
         //this.profile["token"] = "50";
 
         if (this.profile.userId == undefined) {
@@ -42,21 +40,14 @@ export class ProfileComponent implements OnInit {
 
         this.profileService.getProfile(prof).subscribe(res => {
             this.profile = res;
-            if (!this.profile["success"]) {
-                this.router.navigate(['/unauth']);
-            }
+            console.log(this.profile);
         });
 
     }
 
     updateUser() {
-        this.profile["userId"] = this.userIdService.getUserId();
-        this.profile["token"] = this.userIdService.getToken();
         this.profileService.updateProfile(this.profile).subscribe(res => {
             this.profile = res;
-            if (!this.profile["success"]) {
-                this.router.navigate(['/unauth']);
-            }
         });
 
     }
@@ -64,6 +55,5 @@ export class ProfileComponent implements OnInit {
     goBack() {
         this.location.back();
     }
-
 
 }

@@ -3,7 +3,6 @@ export class Login {
     password: string;
     name: string;
     userId: string;
-    token: string;
     message: string;
     success: boolean;
     answer: string;

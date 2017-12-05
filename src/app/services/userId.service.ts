@@ -15,9 +15,9 @@ export class UserIdService{
         this.userName = name;
     }
 
-    setToken(token: string){
-        this.token = token;
-    }
+    // setToken(token: string){
+    //     this.token = token;
+    // }
 
     getUserId(): string{
         return this.userId;
@@ -27,8 +27,8 @@ export class UserIdService{
         return this.userName;
     }
 
-    getToken(): string{
-        return this.token;
-    }
+    // getToken(): string{
+    //     return this.token;
+    // }
 
 } 

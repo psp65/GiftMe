@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyRegistryComponent } from './my-regi/my-regi.component';
+import { SharedRegistryComponent } from './shared-regi/shared-regi.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { AllItemsComponent } from './all-items/all-items.component';
@@ -37,6 +39,8 @@ import { RegistryService } from './services/registry.service';
     AdminComponent,
     LoginComponent,
     DashboardComponent,
+    MyRegistryComponent,
+    SharedRegistryComponent,
     ItemSearchComponent,
     ItemDetailComponent,
     AllItemsComponent,

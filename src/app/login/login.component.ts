@@ -6,7 +6,6 @@ import { SignUp } from '../model/signup';
 
 import { LoginService } from '../services/login-service';
 import { UserIdService } from '../services/userId.service';
-import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'login-component',
@@ -60,7 +59,8 @@ export class LoginComponent implements OnInit {
         if (this.login["success"]) {
           this.userIdService.setUserId(this.login["userId"]);
           this.userIdService.setUserName(this.login["name"]);
-          this.userIdService.setToken(this.login["token"]);
+          // this.userIdService.setToken(this.login["token"]);
+          // console.log(this.userIdService.getToken());
           this.router.navigate(['/dashboard']);
         } 
     });

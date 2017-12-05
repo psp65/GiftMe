@@ -7,6 +7,10 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Registry } from '../model/registry';
+import { UserId } from '../model/userId';
+import { Item } from '../model/item';
+import { SelfAssign } from '../model/selfassign';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -55,6 +59,49 @@ export class RegistryService {
 
     }
 
+    getUserRegisties(userId: UserId): Observable<Registry[]> {
+
+        const getUserServlet = 'RetrieveUserRegistryServlet';
+        const url = `${this.baseUrl}/${getUserServlet}`;
+
+        return this.http.post<Registry[]>(url, userId).pipe(
+            tap(_ => console.log(`successfull sending userId.`)),
+            catchError(this.handleError<Registry[]>(`Error in sending userId`))
+        );
+
+    }
+
+    getUserRegistiesItems(regiId: string): Observable<SelfAssign[]> {
+
+        const getUserServlet = 'RetrieveItemsInRegistryServlet';
+        const url = `${this.baseUrl}/${getUserServlet}`;
+
+        return this.http.post<SelfAssign[]>(url, regiId).pipe(
+            tap(_ => console.log(`successfull sending userId.`)),
+            catchError(this.handleError<SelfAssign[]>(`Error in sending userId`))
+        );
+
+    }
+
+    getSharedWithUserRegisties(userId: UserId): Observable<Registry[]> {
+
+        const getUserServlet = 'RetrieveRegistriesSharedServlet';
+        const url = `${this.baseUrl}/${getUserServlet}`;
+
+        return this.http.post<Registry[]>(url, userId).pipe(
+            tap(_ => console.log(`successfull sending shared userId.`)),
+            catchError(this.handleError<Registry[]>(`Error in sending shared userId`))
+        );
+
+    }
+
+    setUserAssign(special: SelfAssign): void {
+
+        const getUserServlet = 'AssignEmailToRegistryItemServlet';
+        const url = `${this.baseUrl}/${getUserServlet}`;
+
+        this.http.post(url, special);
+    }
 
     /**
    * Handle Http operation that failed.
